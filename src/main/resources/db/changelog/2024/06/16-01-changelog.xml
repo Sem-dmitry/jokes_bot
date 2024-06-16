@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.27.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1718525244343-1" author="Zorro (generated)">
+        <createSequence incrementBy="1" sequenceName="joke_call_id_seq" startValue="1"/>
+    </changeSet>
+    <changeSet id="1718525244343-2" author="Zorro (generated)">
+        <createSequence incrementBy="1" sequenceName="joke_id_seq" startValue="1"/>
+    </changeSet>
+    <changeSet id="1718525244343-3" author="Zorro (generated)">
+        <createSequence incrementBy="1" sequenceName="user_id_seq" startValue="1"/>
+    </changeSet>
+    <changeSet id="1718525244343-4" author="Zorro (generated)">
+        <createSequence incrementBy="1" sequenceName="user_role_id_seq" startValue="1"/>
+    </changeSet>
+    <changeSet id="1718525244343-5" author="Zorro (generated)">
+        <createTable tableName="joke_calls">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_joke_calls"/>
+            </column>
+            <column name="visitor_id" type="BIGINT"/>
+            <column name="call_time" type="DATETIME"/>
+            <column name="joke_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1718525244343-6" author="Zorro (generated)">
+        <createTable tableName="jokes">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_jokes"/>
+            </column>
+            <column name="text" type="VARCHAR(255)"/>
+            <column name="create_date" type="DATETIME"/>
+            <column name="update_date" type="DATETIME"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1718525244343-7" author="Zorro (generated)">
+        <createTable tableName="user_roles">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_user_roles"/>
+            </column>
+            <column name="user_authority" type="SMALLINT"/>
+            <column name="user_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1718525244343-8" author="Zorro (generated)">
+        <createTable tableName="users">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_users"/>
+            </column>
+            <column name="username" type="VARCHAR(255)"/>
+            <column name="password" type="VARCHAR(255)"/>
+            <column name="expired" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="locked" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="enabled" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="1718525244343-9" author="Zorro (generated)">
+        <addForeignKeyConstraint baseColumnNames="joke_id" baseTableName="joke_calls"
+                                 constraintName="FK_JOKE_CALLS_ON_JOKE" referencedColumnNames="id"
+                                 referencedTableName="jokes"/>
+    </changeSet>
+    <changeSet id="1718525244343-10" author="Zorro (generated)">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_roles"
+                                 constraintName="FK_USER_ROLES_ON_USER" referencedColumnNames="id"
+                                 referencedTableName="users"/>
+    </changeSet>
+
+</databaseChangeLog>
